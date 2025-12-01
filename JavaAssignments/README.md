@@ -16,33 +16,6 @@ JavaAssignments/
 └── Assignment8/  (Multithreading & String Manipulation - 19 questions)
 ```
 
-## Completed Assignments
-
-### Assignment 1: Basic Java Programs (✓ Complete)
-All 12 basic Java programs including:
-- Display information, arithmetic operations
-- Number operations (reverse, prime, palindrome, etc.)
-- Input/output operations
-
-### Assignment 2: Control Flow & Functions (✓ Complete)
-All 13 programs including:
-- Tax calculation, grade calculation
-- Quadratic equations, switch statements
-- Factorial, prime numbers, palindrome
-- Armstrong numbers, recursive functions
-
-### Assignment 3: Arrays & Command-line (✓ Complete)
-All 8 programs including:
-- Array searching and sorting
-- Matrix operations
-- Command-line argument processing
-- Jagged arrays
-
-### Assignment 4: OOP Basics (✓ Complete)
-All 10 programs including:
-- Classes for Average, Student, Employee
-- Complex numbers, Box, Point, Time classes
-- Constructor usage and 'this' keyword
 
 ## How to Compile and Run
 
@@ -84,14 +57,8 @@ java Q7_CmdLineStudent 12345 "John Doe" CSE 85 90 78 88 92 86
 11. **String Manipulation**
 12. **Packages**
 
-## Notes
 
-- All programs use Scanner class for input
-- Proper error handling included where applicable
-- Code follows Java naming conventions
-- Comments included for clarity
-- Programs tested and working
 
 ## Author
-B.Tech 3rd Semester Student
+Sumit Mund B.Tech 3rd Semester 
 Academic Year: 2025-26
