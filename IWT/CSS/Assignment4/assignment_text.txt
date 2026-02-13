@@ -1,0 +1,10 @@
+Internet and Web Technology Lab Dept. of CSE, Silicon University Assignment4
+
+In an HTML page-
+Use 3 different heading tags to write HTML, CSS, and JavaScript. Use a suitable display property to display them on the same line.
+Use 3 different <span> tags to write JSP, JDBC, and MySQL. Use a suitable display property to display them in separate lines.
+Design the following login form inside a styled card. Centre align the card with the help of flex box.
+
+Design a Product Section for an eCommerce webpage using Flexbox. Create a container 
+<div> with the title “Featured Products” . Inside the container, add 4 product cards in a  single row. Each product card must include: Product image, Product name (heading), Price (paragraph), “Add to Cart” button
+Enhance the “My Profile” page created in Assignment 2 to build a Personal Portfolio Website.
