@@ -1,0 +1,9 @@
+# Compiled executables
+*.out
+*.exe
+
+# Object files
+*.o
+
+# Debug files
+*.gdb
