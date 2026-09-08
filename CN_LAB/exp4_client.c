@@ -18,42 +18,54 @@
 
 int main(int argc, char *argv[])
 {
-	int soc;
-	char buf[1024], buf1[1024];
-	struct sockaddr_in server;
-	socklen_t addrlen = sizeof(server);
+    int soc;
+    char buf[1024], buf1[1024];
+    struct sockaddr_in server;
+    socklen_t addrlen = sizeof(server);
 
-	if (argc < 2) {
-		fprintf(stderr, "usage %s port\n", argv[0]);
-		exit(1);
-	}
+    if (argc < 2) {
+        fprintf(stderr, "usage %s port\n", argv[0]);
+        exit(1);
+    }
 
-	soc = socket(AF_INET, SOCK_STREAM, 0);
-	if (soc < 0) {
-		perror("Error opening socket");
-		exit(1);
-	}
+    soc = socket(AF_INET, SOCK_STREAM, 0);
 
-	server.sin_family = AF_INET;
-	server.sin_addr.s_addr = inet_addr("127.0.0.1");
-	server.sin_port = htons(atoi(argv[1]));
+    if (soc < 0) {
+        perror("Error opening socket");
+        exit(1);
+    }
 
-	if (connect(soc, (struct sockaddr *) &server, sizeof(server)) < 0) {
-		perror("Error in connection");
-		exit(1);
-	}
+    server.sin_family = AF_INET;
+    server.sin_addr.s_addr = inet_addr("127.0.0.1");
+    server.sin_port = htons(atoi(argv[1]));
 
-	do {
-		printf("Client input: ");
-		bzero(buf, 1024);
-		fgets(buf, 1024, stdin);
-		write(soc, buf, strlen(buf));
+    if (connect(soc, (struct sockaddr *) &server, sizeof(server)) < 0) {
+        perror("Error in connection");
+        exit(1);
+    }
 
-		bzero(buf1, 1024);
-		read(soc, buf1, 1024);
-		printf("Message from server: %s\n", buf1);
-	} while (strncmp(buf, "bye", 3) != 0);
+    do {
+        printf("Client input: ");
 
-	close(soc);
-	return 0;
+        bzero(buf, 1024);
+
+        fgets(buf, 1024, stdin);
+
+        write(soc, buf, strlen(buf));
+
+        /* Check bye before waiting for server reply */
+        if (strncmp(buf, "bye", 3) == 0)
+            break;
+
+        bzero(buf1, 1024);
+
+        read(soc, buf1, 1024);
+
+        printf("Message from server: %s\n", buf1);
+
+    } while (1);
+
+    close(soc);
+
+    return 0;
 }

@@ -4,76 +4,92 @@
 */
 
 /* Experiment 3 : TCP Echo Server that repeatedly echoes the message
-   back to the client until the client types "Exit"  --  CLIENT */
+   back to the client until the client types "Bye"  --  CLIENT */
 
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
+#include <strings.h>       
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
 
 void error(char *msg)
 {
-	perror(msg);
-	exit(0);
+    perror(msg);
+    exit(0);
 }
 
 int main(int argc, char *argv[])
 {
-	int sockfd, portno, n;
-	struct sockaddr_in serv_addr;
-	struct hostent *server;
-	char buffer[256];
+    int sockfd, portno, n;
+    struct sockaddr_in serv_addr;
+    struct hostent *server;
+    char buffer[256];
 
-	if (argc < 3) {
-		fprintf(stderr, "usage %s hostname port\n", argv[0]);
-		exit(0);
-	}
+    if (argc < 3) {
+        fprintf(stderr, "usage %s hostname port\n", argv[0]);
+        exit(0);
+    }
 
-	portno = atoi(argv[2]);
+    portno = atoi(argv[2]);
 
-	sockfd = socket(AF_INET, SOCK_STREAM, 0);
-	if (sockfd < 0)
-		error("ERROR opening socket");
+    sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
-	server = gethostbyname(argv[1]);
-	if (server == NULL) {
-		fprintf(stderr, "ERROR, no such host\n");
-		exit(0);
-	}
+    if (sockfd < 0)
+        error("ERROR opening socket");
 
-	bzero((char *) &serv_addr, sizeof(serv_addr));
-	serv_addr.sin_family = AF_INET;
-	bcopy((char *) server->h_addr, (char *) &serv_addr.sin_addr.s_addr, server->h_length);
-	serv_addr.sin_port = htons(portno);
+    server = gethostbyname(argv[1]);
 
-	if (connect(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0)
-		error("ERROR connecting");
+    if (server == NULL) {
+        fprintf(stderr, "ERROR, no such host\n");
+        exit(0);
+    }
 
-	while (1) {
-		printf("Please Enter the Message: ");
-		bzero(buffer, 256);
-		fgets(buffer, 255, stdin);
+    bzero((char *) &serv_addr, sizeof(serv_addr));
 
-		n = write(sockfd, buffer, strlen(buffer));
-		if (n < 0)
-			error("ERROR writing to socket");
+    serv_addr.sin_family = AF_INET;
 
-		bzero(buffer, 256);
-		n = read(sockfd, buffer, 255);
-		if (n < 0)
-			error("ERROR reading from socket");
+    bcopy((char *) server->h_addr,
+          (char *) &serv_addr.sin_addr.s_addr,
+          server->h_length);
 
-		printf("Echo from server: %s\n", buffer);
+    serv_addr.sin_port = htons(portno);
 
-		/* exit when the user types "Exit" */
-		if (strncmp(buffer, "Exit", 4) == 0)
-			break;
-	}
+    if (connect(sockfd, (struct sockaddr *) &serv_addr,
+                sizeof(serv_addr)) < 0)
+        error("ERROR connecting");
 
-	close(sockfd);
-	return 0;
+    while (1) {
+
+        printf("Please Enter the Message: ");
+
+        bzero(buffer, 256);
+
+        fgets(buffer, 255, stdin);
+
+        n = write(sockfd, buffer, strlen(buffer));
+
+        if (n < 0)
+            error("ERROR writing to socket");
+
+        bzero(buffer, 256);
+
+        n = read(sockfd, buffer, 255);
+
+        if (n < 0)
+            error("ERROR reading from socket");
+
+        printf("Echo from server: %s\n", buffer);
+
+        /* exit when the user types "Bye" */
+        if (strncmp(buffer, "Bye", 3) == 0)
+            break;
+    }
+
+    close(sockfd);
+
+    return 0;
 }
