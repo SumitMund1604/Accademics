@@ -1,0 +1,10 @@
+physical - topological view
+design - real time
+simulation - tracing of packets
+cupper cross over - similar
+cupper straight cable - dissimilar
+thunder(symbol) - universal connector
+pdu - protocol data unit
+
+exp-01 
+Create a simple network in packet tracer using a switch, a hub and some pc. Run the simulation and test the network
