@@ -2,7 +2,7 @@
 
 This repository contains a collection of Cisco Packet Tracer (`.pkt`) lab files demonstrating fundamental networking concepts, from basic topologies to advanced routing and server configurations. 
 
-## 📂 Project Files Directory
+##  Project Files Directory
 
 Below is a list of the included Packet Tracer files and a brief description of what each demonstrates based on the lab assignments:
 
@@ -18,7 +18,5 @@ Below is a list of the included Packet Tracer files and a brief description of w
 | `t2.pkt` | Assignment 11 | (Static Routing) Configuring 2 routers and routing tables to connect two distinct LANs. |
 | `vlan.pkt` | Assignment 12 | Configuration of Virtual Local Area Networks to segment broadcast domains. |
 
-## 🛠️ Prerequisites
-* **Cisco Packet Tracer** (Version 8.x or higher recommended) must be installed to open and run these files.
 ---
 *Created as part of academic networking coursework.*
